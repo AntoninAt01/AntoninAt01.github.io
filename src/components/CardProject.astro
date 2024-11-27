@@ -1,7 +1,14 @@
+---
+import data from './data.js'
+const { 
+  idprojet = 0,
+} = Astro.props;
+---
+
 <section class="flex gap-10">
     <div class="w-96">
-        <h3>Titre projet</h3>
-        <p>Description projet</p>
+        <h3>{data[idprojet].title}</h3>
+        <p>{data[idprojet].description}</p>
     </div>
     <img src="https://via.placeholder.com/700" alt="placeholder"/>
 </section>
