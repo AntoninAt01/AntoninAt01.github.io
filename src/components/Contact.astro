@@ -1,3 +1,15 @@
-<section class="flex gap-10">
-    
+<section class="flex flex-col gap-10 justify-center items-center pb-20">
+    <h2 id="contact" class="pt-20">Contactez moi</h2>
+    <form action="mailto:antonin.trebosc@etu.unilim.fr" method="post" enctype="text/plain" class="flex flex-col w-1/2 gap-4">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required class="border p-2">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required class="border p-2">
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required class="border p-2"></textarea>
+
+        <button type="submit" class="bg-blue-500 text-white p-2 mt-4">Envoyer</button>
+    </form>
 </section>
