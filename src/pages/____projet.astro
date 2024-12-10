@@ -1,0 +1,12 @@
+---
+import data from '../components/data.js'
+import Header2 from '../components/Header2.astro'
+const { 
+  idprojet = 0,
+} = Astro.props;
+---
+
+<body class="bg-slate-200">
+  <Header2 />
+  <h1 class="text-4xl font-bold text-center mt-8">Projet {idprojet}</h1>
+</body>

@@ -1,15 +1,15 @@
-<section class="flex flex-col gap-10 justify-center items-center pb-20">
-    <h2 id="contact" class="pt-20">Contactez moi</h2>
-    <form action="mailto:antonin.trebosc@etu.unilim.fr" method="post" enctype="text/plain" class="flex flex-col w-1/2 gap-4">
+<section class="flex flex-col gap-10 justify-center items-center pb-20 bg-Black">
+    <h2 id="contact" class="pt-20 sm:text-5xl text-3xl text-Primary">Contactez moi</h2>
+    <form action="mailto:antonin.trebosc@etu.unilim.fr" method="post" enctype="text/plain" class="flex flex-col w-1/2 text-base sm:text-2xl text-White">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required class="border p-2">
+        <input type="text" id="name" name="name" required class="border border-White bg-transparent mb-4 rounded">
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required class="border p-2">
+        <input type="email" id="email" name="email" required class="border border-White bg-transparent mb-4 rounded">
 
         <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="4" required class="border p-2"></textarea>
+        <textarea id="message" name="message" rows="4" required class="border border-White bg-transparent mb-4 rounded"></textarea>
 
-        <button type="submit" class="bg-blue-500 text-white p-2 mt-4">Envoyer</button>
+        <button type="submit" class="bg-Black2 text-Primary p-2 mt-4 rounded">Envoyer</button>
     </form>
 </section>

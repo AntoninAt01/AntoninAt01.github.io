@@ -1,0 +1,30 @@
+---
+import data from '../../components/data.js'
+import Header2 from '../../components/Header2.astro'
+import BaseHead from '../../components/BaseHead.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+
+export async function getStaticPaths() {
+	return data.map((projet, index) => ({
+		params: { idprojet: index },
+		props: projet,
+	}));
+}
+
+const projet = Astro.props
+---
+
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+
+<body class="bg-Black">
+  <Header2 />
+  <section class="bg-Black">
+	<h1 class="text-4xl font-bold text-center mt-20">Projet {projet.title}</h1>
+  </section>
+</body>
+</html>

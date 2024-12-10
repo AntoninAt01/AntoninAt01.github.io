@@ -2,7 +2,7 @@
 const today = new Date();
 ---
 
-<footer>
+<footer class="text-sm sm:text-xl bg-Black2">
 	&copy; {today.getFullYear()} Antonin TREBOSC. Tous droits réservés.
 	<div class="social-links">
 		
@@ -21,8 +21,7 @@ const today = new Date();
 <style>
 	footer {
 		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
+		color: white;
 		text-align: center;
 	}
 	.social-links {
@@ -30,12 +29,5 @@ const today = new Date();
 		justify-content: center;
 		gap: 1em;
 		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
 	}
 </style>
