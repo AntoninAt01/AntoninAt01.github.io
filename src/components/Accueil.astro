@@ -1,35 +1,94 @@
----
-import data from './data.js'
-import Fleche from '../assets/Fleche.svg'
----
-
-<section class="flex flex-col h-screen justify-between bg-Black">
-    <div class="flex flex-col w-80 sm:w-full pl-10 justify-center rotating-text text-Primary">
-        <div class="h-40"></div>
+<section class="absolute flex flex-col h-screen w-screen justify-between bg-Black overflow-hidden">
+    <!-- Contenu principal -->
+    <div id="image3" class="flex flex-col w-80 sm:w-full pl-10 justify-center rotating-text text-Primary z-10">
+        <div class="h-56"></div>
         <h2 class="sm:text-9xl text-6xl text-Primary font-Inter font-bold">Portfolio</h2>
         <div class="flex items-center gap-2 sm:text-3xl text-sm">
             <p class="m-0">2024</p>
-            <div class=" w-60 h-1 bg-Primary"></div>
+            <div class="w-60 h-1 bg-Primary"></div>
             <p class="m-0">Antonin TREBOSC</p>
         </div>
+    </div>
+
+    <!-- Images avec effet de parallaxe et rotation -->
+    <img id="image1" class="absolute right-8" style="top: 26rem; width:150rem; height: 40vh" src="./C1.png" alt="">
+    <img id="image2" class="absolute left-6 sm:left-64" style="top: 1rem; height: 120vh" src="./C2.png" alt="">
+
     <style>
+        /* Ajouter du style pour les images */
+        #image1, #image2, #image3 {
+            transition: transform 0.2s ease-out; /* Ajout d'une transition fluide */
+            will-change: transform; /* Optimisation des performances */
+            transform-style: preserve-3d; /* Assurer que les éléments peuvent tourner en 3D */
+        }
+
         .rotating-text {
             transform-style: preserve-3d;
             transition: transform 0.1s;
         }
+
     </style>
 
     <script>
-        document.addEventListener('mousemove', (event) => {
-            const textElement = document.querySelector('.rotating-text');
-            const { clientX: mouseX, clientY: mouseY } = event;
+        let requestId: number | null = null;
+
+        // Fonction de mise à jour des positions de la souris avec requestAnimationFrame
+        function updatePosition(event: MouseEvent) {
+            // Cibler les trois images
+            const image1 = document.querySelector('#image1') as HTMLElement | null;
+            const image2 = document.querySelector('#image2') as HTMLElement | null;
+            const image3 = document.querySelector('#image3') as HTMLElement | null;
+
+            // Vérifier que les éléments existent
+            if (!image1 || !image2 || !image3) return;
+
+            // Récupérer les dimensions de la fenêtre
             const { innerWidth: width, innerHeight: height } = window;
-            const rotateY = ((mouseX / width) * 30) - 15;
-            const rotateX = ((mouseY / height) * -30) + 15;
-            //textElement.style.transformOrigin = 'center center'; // Change the center of rotation
-            //textElement.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+            
+            // Calculer les mouvements de la souris par rapport à la taille de la fenêtre
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+            
+            // Appliquer un effet de parallaxe différent pour chaque image
+            const moveFactor1 = 40; // Vitesse de l'effet pour image1 (avant-plan, plus rapide)
+            const moveFactor2 = 70; // Vitesse de l'effet pour image2 (arrière-plan proche, plus lent)
+            const moveFactor3 = 120;  // Vitesse de l'effet pour image3 (plus arrière, encore plus lent)
+
+            // Calculer la translation en fonction de la position de la souris
+            const moveX1 = ((mouseX / width) - 0.5) * moveFactor1;  // Déplacement sur l'axe X pour image1
+            const moveY1 = ((mouseY / height) - 0.5) * moveFactor1; // Déplacement sur l'axe Y pour image1
+
+            const moveX2 = ((mouseX / width) - 0.5) * moveFactor2;  // Déplacement sur l'axe X pour image2
+            const moveY2 = ((mouseY / height) - 0.5) * moveFactor2; // Déplacement sur l'axe Y pour image2
+
+            const moveX3 = ((mouseX / width) - 0.5) * moveFactor3;  // Déplacement sur l'axe X pour image3
+            const moveY3 = ((mouseY / height) - 0.5) * moveFactor3; // Déplacement sur l'axe Y pour image3
+
+            // Calculer la rotation en fonction de la position de la souris
+            const rotateX = (mouseY / height - 0.5) * 20;  // Rotation sur l'axe X
+            const rotateY = (mouseX / width - 0.5) * -20;  // Rotation sur l'axe Y (négatif pour inverser la direction)
+
+            // Appliquer les transformations (parallaxe + rotation) sur les images
+            image1.style.transform = `translate3d(${moveX1}px, ${moveY1}px, 0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            image2.style.transform = `translate3d(${moveX2}px, ${moveY2}px, 0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            image3.style.transform = `translate3d(${moveX3}px, ${moveY3}px, 0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+            // Demander au navigateur de mettre à jour le mouvement au prochain rafraîchissement
+            requestId = requestAnimationFrame(() => updatePosition(event));
+        }
+
+        // Attacher l'événement mousemove
+        document.addEventListener('mousemove', (event: MouseEvent) => {
+            // Annuler le précédent requestAnimationFrame pour éviter les appels multiples
+            if (requestId !== null) {
+                cancelAnimationFrame(requestId);
+            }
+
+            // Lancer l'animation avec requestAnimationFrame
+            requestAnimationFrame(() => updatePosition(event));
         });
     </script>
+
     </div>
     <div class="flex pb-10 justify-center items-end">
         <a href="#projets"><img src="Fleche.svg" alt="Flèche de navigation"/></a>

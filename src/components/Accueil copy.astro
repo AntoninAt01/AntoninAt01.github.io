@@ -1,0 +1,38 @@
+---
+import data from './data.js'
+import Fleche from '../assets/Fleche.svg'
+---
+
+<section class="flex flex-col h-screen justify-between bg-Black overflow-hidden border-b-4 border-red-500">
+    <div class="flex flex-col w-80 sm:w-full pl-10 justify-center rotating-text text-Primary">
+        <div class="h-40"></div>
+        <h2 class="sm:text-9xl text-6xl text-Primary font-Inter font-bold">Portfolio</h2>
+        <div class="flex items-center gap-2 sm:text-3xl text-sm">
+            <p class="m-0">2024</p>
+            <div class=" w-60 h-1 bg-Primary">
+        </div>
+        <p class="m-0">Antonin TREBOSC</p>
+    </div>
+    <style>
+        .rotating-text {
+            transform-style: preserve-3d;
+            transition: transform 0.1s;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('mousemove', (event) => {
+            const textElement = document.querySelector('.rotating-text');
+            const { clientX: mouseX, clientY: mouseY } = event;
+            const { innerWidth: width, innerHeight: height } = window;
+            const rotateY = ((mouseX / width) * 30) - 15;
+            const rotateX = ((mouseY / height) * -30) + 15;
+            //textElement.style.transformOrigin = 'center center'; // Change the center of rotation
+            //textElement.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+        });
+    </script>
+    </div>
+    <div class="flex pb-10 justify-center items-end">
+        <a href="#projets"><img src="Fleche.svg" alt="Flèche de navigation"/></a>
+    </div>
+</section>
